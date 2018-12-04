@@ -382,7 +382,8 @@ class Camera1 extends CameraViewImpl {
 
     /**
      * Calculate display orientation
-     * https://developer.android.com/reference/android/hardware/Camera.html#setDisplayOrientation(int)
+     * https://developer.android.com/reference/android/hardware/Camera.html#setDisplayOrientation
+     * (int)
      *
      * This calculation is used for orienting the preview
      *

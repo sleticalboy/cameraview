@@ -573,6 +573,8 @@ class Camera2 extends CameraViewImpl {
                 mPreviewRequestBuilder.set(CaptureRequest.FLASH_MODE,
                         CaptureRequest.FLASH_MODE_OFF);
                 break;
+            default:
+                break;
         }
     }
 
@@ -624,6 +626,8 @@ class Camera2 extends CameraViewImpl {
                 case Constants.FLASH_RED_EYE:
                     captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                             CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+                    break;
+                default:
                     break;
             }
             // Calculate JPEG orientation.

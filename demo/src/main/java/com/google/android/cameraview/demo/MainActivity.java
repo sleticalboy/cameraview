@@ -99,8 +99,54 @@ public class MainActivity extends AppCompatActivity implements
                         mCameraView.takePicture();
                     }
                     break;
+                default:
+                    break;
             }
         }
+    };
+    private CameraView.Callback mCallback
+            = new CameraView.Callback() {
+
+        @Override
+        public void onCameraOpened(CameraView cameraView) {
+            Log.d(TAG, "onCameraOpened");
+        }
+
+        @Override
+        public void onCameraClosed(CameraView cameraView) {
+            Log.d(TAG, "onCameraClosed");
+        }
+
+        @Override
+        public void onPictureTaken(CameraView cameraView, final byte[] data) {
+            Log.d(TAG, "onPictureTaken " + data.length);
+            Toast.makeText(cameraView.getContext(), R.string.picture_taken, Toast.LENGTH_SHORT)
+                    .show();
+            getBackgroundHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                            "picture.jpg");
+                    OutputStream os = null;
+                    try {
+                        os = new FileOutputStream(file);
+                        os.write(data);
+                        os.close();
+                    } catch (IOException e) {
+                        Log.w(TAG, "Cannot write to " + file, e);
+                    } finally {
+                        if (os != null) {
+                            try {
+                                os.close();
+                            } catch (IOException e) {
+                                // Ignore
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
     };
 
     @Override
@@ -176,6 +222,8 @@ public class MainActivity extends AppCompatActivity implements
                 }
                 // No need to start camera here; it is handled by onResume
                 break;
+            default:
+                break;
         }
     }
 
@@ -213,6 +261,8 @@ public class MainActivity extends AppCompatActivity implements
                             CameraView.FACING_BACK : CameraView.FACING_FRONT);
                 }
                 return true;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -233,51 +283,6 @@ public class MainActivity extends AppCompatActivity implements
         }
         return mBackgroundHandler;
     }
-
-    private CameraView.Callback mCallback
-            = new CameraView.Callback() {
-
-        @Override
-        public void onCameraOpened(CameraView cameraView) {
-            Log.d(TAG, "onCameraOpened");
-        }
-
-        @Override
-        public void onCameraClosed(CameraView cameraView) {
-            Log.d(TAG, "onCameraClosed");
-        }
-
-        @Override
-        public void onPictureTaken(CameraView cameraView, final byte[] data) {
-            Log.d(TAG, "onPictureTaken " + data.length);
-            Toast.makeText(cameraView.getContext(), R.string.picture_taken, Toast.LENGTH_SHORT)
-                    .show();
-            getBackgroundHandler().post(new Runnable() {
-                @Override
-                public void run() {
-                    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            "picture.jpg");
-                    OutputStream os = null;
-                    try {
-                        os = new FileOutputStream(file);
-                        os.write(data);
-                        os.close();
-                    } catch (IOException e) {
-                        Log.w(TAG, "Cannot write to " + file, e);
-                    } finally {
-                        if (os != null) {
-                            try {
-                                os.close();
-                            } catch (IOException e) {
-                                // Ignore
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-    };
 
     public static class ConfirmationDialogFragment extends DialogFragment {
 
