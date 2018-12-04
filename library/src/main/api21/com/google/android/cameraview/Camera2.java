@@ -303,7 +303,7 @@ class Camera2 extends CameraViewImpl {
     }
 
     @Override
-    boolean getAutoFocus() {
+    boolean isAutoFocus() {
         return mAutoFocus;
     }
 

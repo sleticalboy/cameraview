@@ -194,7 +194,7 @@ class Camera1 extends CameraViewImpl {
     }
 
     @Override
-    boolean getAutoFocus() {
+    boolean isAutoFocus() {
         if (!isCameraOpened()) {
             return mAutoFocus;
         }
@@ -223,7 +223,7 @@ class Camera1 extends CameraViewImpl {
             throw new IllegalStateException(
                     "Camera is not ready. Call start() before takePicture().");
         }
-        if (getAutoFocus()) {
+        if (isAutoFocus()) {
             mCamera.cancelAutoFocus();
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override

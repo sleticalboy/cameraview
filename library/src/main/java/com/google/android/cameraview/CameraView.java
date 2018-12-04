@@ -219,7 +219,7 @@ public class CameraView extends FrameLayout {
         SavedState state = new SavedState(super.onSaveInstanceState());
         state.facing = getFacing();
         state.ratio = getAspectRatio();
-        state.autoFocus = getAutoFocus();
+        state.autoFocus = isAutoFocus();
         state.flash = getFlash();
         return state;
     }
@@ -375,8 +375,8 @@ public class CameraView extends FrameLayout {
      * @return {@code true} if the continuous auto-focus mode is enabled. {@code false} if it is
      * disabled, or if it is not supported by the current camera.
      */
-    public boolean getAutoFocus() {
-        return mImpl.getAutoFocus();
+    public boolean isAutoFocus() {
+        return mImpl.isAutoFocus();
     }
 
     /**

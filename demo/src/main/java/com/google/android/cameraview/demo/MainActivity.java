@@ -262,9 +262,8 @@ public class MainActivity extends AppCompatActivity implements
                 }
                 return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

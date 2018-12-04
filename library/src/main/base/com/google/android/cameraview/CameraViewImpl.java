@@ -44,9 +44,9 @@ abstract class CameraViewImpl {
 
     abstract boolean isCameraOpened();
 
-    abstract void setFacing(int facing);
-
     abstract int getFacing();
+
+    abstract void setFacing(int facing);
 
     abstract Set<AspectRatio> getSupportedAspectRatios();
 
@@ -57,26 +57,45 @@ abstract class CameraViewImpl {
 
     abstract AspectRatio getAspectRatio();
 
+    /**
+     * @return {@code true} if the camera is auto focus mode
+     */
+    abstract boolean isAutoFocus();
+
+    /**
+     * set camera auto focus
+     */
     abstract void setAutoFocus(boolean autoFocus);
-
-    abstract boolean getAutoFocus();
-
-    abstract void setFlash(int flash);
 
     abstract int getFlash();
 
+    abstract void setFlash(int flash);
+
+    /**
+     * Call this method to take a picture
+     */
     abstract void takePicture();
 
     abstract void setDisplayOrientation(int displayOrientation);
 
     interface Callback {
 
+        /**
+         * Called when the camera is opened
+         */
         void onCameraOpened();
 
+        /**
+         * Called when the camera is closed
+         */
         void onCameraClosed();
 
+        /**
+         * Called when the picture is taken
+         *
+         * @param data the picture data
+         */
         void onPictureTaken(byte[] data);
-
     }
 
 }

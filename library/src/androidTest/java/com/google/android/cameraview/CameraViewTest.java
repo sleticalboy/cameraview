@@ -176,11 +176,11 @@ public class CameraViewTest {
                     public void check(View view, NoMatchingViewException noViewFoundException) {
                         CameraView cameraView = (CameraView) view;
                         // This can fail on devices without auto-focus support
-                        assertThat(cameraView.getAutoFocus(), is(true));
+                        assertThat(cameraView.isAutoFocus(), is(true));
                         cameraView.setAutoFocus(false);
-                        assertThat(cameraView.getAutoFocus(), is(false));
+                        assertThat(cameraView.isAutoFocus(), is(false));
                         cameraView.setAutoFocus(true);
-                        assertThat(cameraView.getAutoFocus(), is(true));
+                        assertThat(cameraView.isAutoFocus(), is(true));
                     }
                 });
     }
